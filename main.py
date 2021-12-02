@@ -15,6 +15,7 @@ class Users(db.Model):
 
     Annonsers =  db.relationship('Annonser', backref='Users', lazy=True)
 
+
 class Anonsers(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     Title = db.Column(db.String(50), unique=False, nullable=False)
@@ -22,5 +23,13 @@ class Anonsers(db.Model):
     StartPrice = db.Column(db.Integer, unique=False, nullable=True)
     StartDateTime = db.Column(db.Datetime, unique=False, nullable=True)
     EndDateTime = db.Column(db.Datetime, unique=False, nullable=True)
+    Bild_Id = db.Column(db.Integer, db.ForeignKey('Bilder.Id'), unique=False, nullable=True)
+    User_Id = db.Column(db.Integer, db.ForeignKey('Users.Id'), unique=False, nullable=True)
 
-    Skotare_Id=db.Column(db.Integer, db.ForeignKey('skotare.Id'),    nullable=False)
+
+class Bilder(db.Model):
+    Id = db.Column(db.Integer, primary_key=True)
+    URL = db.Column(db.String(100), unique=False, nullable=False)
+    Description = db.Column(db.String(300), unique=False, nullable=True)
+
+    Annonsers =  db.relationship('Annonser', backref='Bilder', lazy=True)
