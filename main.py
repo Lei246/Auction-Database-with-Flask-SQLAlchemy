@@ -31,5 +31,3 @@ class Bilder(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     URL = db.Column(db.String(100), unique=False, nullable=False)
     Description = db.Column(db.String(300), unique=False, nullable=True)
-
-    Annonsers =  db.relationship('Annonser', backref='Bilder', lazy=True)
