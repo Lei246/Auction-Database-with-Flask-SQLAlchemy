@@ -55,6 +55,7 @@ class Bud(db.Model):
 db.create_all()
 
 while True:
+    print("******************************")
     print("1. Create a new user: ")
     print("2. List all the users: ")
     print("3. Create a new bild: ")
@@ -62,6 +63,8 @@ while True:
     print("5. Create a new anons: ")
     print("6. List all the anonser: ")
     print("7. Give a new(higher) bud: ")
+    print("******************************")
+
 
 
 
@@ -95,7 +98,7 @@ while True:
         l = Loggin()
         for s in Users.query.all():
             print(f"{s.Id}  {s.Username}")
-        l.User_Id = input("choose your User_Id to log in:")
+        l.User_Id = input("Enter your UserId to log in:")
         l.IPAdrress = socket.gethostbyname(socket.gethostname())
         db.session.add(l)
         db.session.commit() 
@@ -135,7 +138,7 @@ while True:
         b.Anonsers_Id = selectedId
         selected = Bud.query.filter_by(Anonsers_Id = selectedId)
         for row in selected:
-            selected_first = Anonsers.query.filter_by(Id = selectedId).first()
+            print(f"{row.Anonsers_Id} {row.NewPrice}")
 
         b.NewPrice = input("Ange a higher price:")
 
