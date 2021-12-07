@@ -33,7 +33,7 @@ class Anonsers(db.Model):
     StartPrice = db.Column(db.Integer, unique=False, nullable=True)
     StartDateTime = db.Column(db.DateTime, unique=False, nullable=True)
     EndDateTime = db.Column(db.DateTime, unique=False, nullable=True)
-    Bild_Id = db.Column(db.Integer, db.ForeignKey('bilder.Id'), unique=False, nullable=True) # ForeignKey('bilder.Id') NOT ('Bilder.Id')
+    Bild_Id = db.Column(db.Integer, db.ForeignKey('bilder.Id'), default= 5, unique=False, nullable=True) # ForeignKey('bilder.Id') NOT ('Bilder.Id')
     User_Id = db.Column(db.Integer, db.ForeignKey('users.Id'), unique=False, nullable=False)
 
     Bud =  db.relationship('Bud', backref='Anonsers', lazy=True)
@@ -111,9 +111,9 @@ while True:
         a.StartPrice = input("Ange start price:")
         a.StartDateTime = input("Ange start date and time:")
         a.EndDateTime = input("Ange end date and time:")
-        for s in Bilder.query.all():
-            print(f"{s.Id}  {s.Description}")
-        a.Bild_Id = input ("Ange bild id: ")
+        #for s in Bilder.query.all():
+            #print(f"{s.Id}  {s.Description}")
+        #a.Bild_Id = input ("Ange bild id: ")
         for s in Users.query.all():
             print(f"{s.Id}  {s.Username}")
         a.User_Id = input ("Ange user id: ")
@@ -137,8 +137,9 @@ while True:
         selectedId = input("Ange your anons id:")
         b.Anonsers_Id = selectedId
         selected = Bud.query.filter_by(Anonsers_Id = selectedId)
+        print("AnonId UserId Bud")
         for row in selected:
-            print(f"{row.Anonsers_Id} {row.NewPrice}")
+            print(f"{row.Anonsers_Id}  {row.User_Id}  {row.NewPrice}")
 
         b.NewPrice = input("Ange a higher price:")
 
